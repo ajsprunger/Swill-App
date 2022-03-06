@@ -2,7 +2,7 @@ import { Brewery } from "../models/brewery.js";
 import https from "https";
 
 function index(req, res) {
-  list(req, res)
+  let data = list(req, res)
   console.log(data)
   .then(data => {
     res.render('breweries/index', {
@@ -20,7 +20,6 @@ function list(req, res) {
   let name = req.body.name
   let city = req.body.city
   let state = req.body.state
-  console.log(name)
   let url = 'https://api.openbrewerydb.org/breweries?by_name=' + name + '&by_city=' + city + '&by_state=' + state
   https.get(url, (resp) => {
     let data = '';
@@ -28,7 +27,9 @@ function list(req, res) {
       data += chunk;
     });
     resp.on('end', () => {
-      res.send(data)
+      console.log(data)
+      return data;
+      // res.send(data);
     });
   })
   .on("error", (err) => {
@@ -36,7 +37,12 @@ function list(req, res) {
   })
 }
 
+function show(req, res) {
+  console.log('show page')
+}
+
 export {
   index,
   list,
+  show,
 }

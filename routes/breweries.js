@@ -6,8 +6,10 @@ const router = Router()
 
 // GET - localhost:3000/brewery
 router.get('/', breweriesCtrl.index)
-// POST 
+// POST - localhost:3000/brewery
 router.post('/', breweriesCtrl.list)
+// GET - localhost:3000/brewery/:id
+router.get('/:id', breweriesCtrl.show)
 
 
 

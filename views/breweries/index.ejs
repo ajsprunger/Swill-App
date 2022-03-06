@@ -14,7 +14,25 @@
   <button type="submit">Search</button>
 </form>
 <h1>Breweries</h1>
-
+<table>
+  <thead>
+    <tr>
+      <th>Brewery</th>
+      <th>City</th>
+      <th>State</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% data.forEach(function(brewery) { %>
+      <tr>
+        <td><%= brewery.name %></td>
+        <td><%= brewery.city %></td>
+        <td><%= brewery.state %></td>
+        <td><a href="/breweries/<%= data.id %>">DETAILS</a></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
 
 
 
