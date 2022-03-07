@@ -44,12 +44,16 @@ function show(req, res) {
 }
 
 function createReview(req, res) {
-  console.log('user', req.params.userId)
+  let user = req.user.profile._id
   let id = req.params.id
-  const brewery = new Brewery(req.body, id)
-  brewery.save(function (err) {
-    if (err) return
-    res.redirect(`/breweries`)
+  let brew = {
+    name: req.body.name,
+    breweryId: id,
+    reviews: [{rating: req.body.rating, user: user, comment: req.body.comment}]
+  }
+  Brewery.findOneAndUpdate({breweryId:brew.breweryId}, brew.reviews, {upsert: true}, function (err) {
+    if (err) return res.send(500, {error: err})
+    return res.redirect(`/breweries/${id}`)
   })
 }
 
