@@ -5,7 +5,8 @@ const Schema = mongoose.Schema
 const profileSchema = new mongoose.Schema({
   name: String,
   avatar: String,
-  brewries: [{type: Schema.Types.ObjectId, ref: "Brewery"}]
+  breweries: [{type: Schema.Types.ObjectId, ref: "Brewery"}],
+  reviews: [{type: Schema.Types.ObjectId, ref: "Review"}],
 }, {
   timestamps: true
 })

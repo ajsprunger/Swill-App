@@ -16,7 +16,8 @@ function index(req, res) {
 
 function show(req, res) {
   Profile.findById(req.params.id)
-  .then(profile => {
+  .populate('breweries')
+  .exec(function (err, profile) {
     Profile.findById(req.user.profile._id)
     .then(self => {
       const isSelf = self._id.equals(profile._id)
@@ -26,10 +27,10 @@ function show(req, res) {
         isSelf
       })
     })
-  })
-  .catch(err => {
-    console.log(err)
-    res.redirect("/")
+    .catch(err => {
+      console.log(err)
+      res.redirect("/")
+    })
   })
 }
 

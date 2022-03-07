@@ -12,6 +12,25 @@
     </div>
   <% } %>
   <h1>It's <%= isSelf ? "you" : profile.name %>!</h1>
+  <h1>Brewery<%= profile.breweries %></h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Brewery</th>
+        <th>Review</th>
+        <th>Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% profile.breweries.forEach(function (brewery) { %>
+        <tr>
+          <td><%= brewery.name %></td>
+          <td><%= brewery.review %></td>
+          <td><%= brewery.rating %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
 </main>
 
   <%- include('../partials/footer') %>
