@@ -26,12 +26,15 @@ function index(req, res) {
 function show(req, res) {
   let id = req.originalUrl
   let url = 'https://api.openbrewerydb.org' + id
-  let showData = ''
+  let data = ''
   https.get(url, (resp) => {
+    resp.on('data', (chunk) => {
+      data += chunk;
+    })
     resp.on('end', () => {
       res.render('breweries/show', {
-        showData: JSON.parse(showData),
-        title: req.brewery.name
+        data: JSON.parse(data),
+        title: data.name
       })
     })
   })
