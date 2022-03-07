@@ -3,11 +3,10 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema
 
 const brewerySchema = new Schema({
-  name: {type: String, required: true},
-  brewery: String,
+  id: String,
+  profileId: String,
   reviews: [],
   rating: Number,
-  style: String,
 })
 
 const Brewery = mongoose.model('Brewery', brewerySchema)

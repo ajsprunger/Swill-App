@@ -26,9 +26,9 @@
       <div><%= data.postal_code %></div>
     <% } %>
   </section>
-  <form action="">
+  <form action="<%= data.id %>/reviews" method="POST">
     <textarea cols="40" rows="5" autocomplete="off">Add a Review</textarea>
-    <select name="score" id="dropdown">
+    <select name="rating" id="dropdown">
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>

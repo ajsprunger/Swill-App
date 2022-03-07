@@ -10,6 +10,8 @@ router.get('/', breweriesCtrl.index)
 router.post('/', breweriesCtrl.index)
 // GET - localhost:3000/brewery/:id
 router.get('/:id', breweriesCtrl.show)
+// POST - localhost:3000/brewery/:id/reviews
+router.post('/:id/reviews', breweriesCtrl.createReview)
 
 
 

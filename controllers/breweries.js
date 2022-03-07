@@ -43,7 +43,18 @@ function show(req, res) {
   })
 }
 
+function createReview(req, res) {
+  console.log('user', req.params.userId)
+  let id = req.params.id
+  const brewery = new Brewery(req.body, id)
+  brewery.save(function (err) {
+    if (err) return
+    res.redirect(`/breweries`)
+  })
+}
+
 export {
   index,
   show,
+  createReview,
 }
