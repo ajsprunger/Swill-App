@@ -1,21 +1,30 @@
 <%- include('../partials/html-head') %>
+<link rel="stylesheet" href="../stylesheets/breweries/show.css">
 <%- include('../partials/nav') %>
 
 <main>
   <h1><%= data.name %></h1>
   <section>
-    <div>Brewery:</div>
-    <div><%= data.name %></div>
-    <div>Type:</div>
-    <div><%= data.type %></div>
-    <div>Address:</div>
-    <div><%= data.street %></div>
-    <div>City:</div>
-    <div><%= data.city %></div>
-    <div>State:</div>
-    <div><%= data.state %></div>
-    <div>ZIP:</div>
-    <div><%= data.postal_code %></div>
+    <% if(data.type) { %>
+      <div>Type:</div>
+      <div><%= data.type %></div>
+    <% } %>
+    <% if(data.street) { %>
+      <div>Address:</div>
+      <div><%= data.street %></div>
+    <% } %>
+    <% if(data.city) { %>
+      <div>City:</div>
+      <div><%= data.city %></div>
+    <% } %>
+    <% if(data.state) { %>
+      <div>State:</div>
+      <div><%= data.state %></div>
+    <% } %>
+    <% if(data.postal_code) { %>
+      <div>ZIP:</div>
+      <div><%= data.postal_code %></div>
+    <% } %>
   </section>
 </main>
 
