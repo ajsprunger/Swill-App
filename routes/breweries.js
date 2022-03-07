@@ -9,7 +9,7 @@ router.get('/', breweriesCtrl.index)
 // POST - localhost:3000/brewery
 router.post('/', breweriesCtrl.index)
 // GET - localhost:3000/brewery/:id
-router.get('/:id',isLoggedIn, breweriesCtrl.show)
+router.get('/:id', breweriesCtrl.show)
 // POST - localhost:3000/brewery/:id/reviews
 router.post('/:id/reviews',isLoggedIn, breweriesCtrl.createReview)
 

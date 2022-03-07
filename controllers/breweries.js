@@ -1,5 +1,6 @@
 import { Brewery } from "../models/brewery.js";
 import https from "https";
+import { Profile } from "../models/profile.js";
 
 function index(req, res) {
   let name = req.query.name || ''
@@ -46,14 +47,27 @@ function show(req, res) {
 function createReview(req, res) {
   let user = req.user.profile._id
   let id = req.params.id
-  Brewery.findOneAndUpdate({breweryId:id}, {$push: {"reviews": {rating: req.body.rating, user: user, comment: req.body.comment}}}, {upsert: true}, function (err) {
-    if (err) return res.send(500, {error: err})
-    return res.redirect(`/breweries/${id}`)
+  Brewery.findOneAndUpdate({breweryId:id}, {$push: {"reviews": {rating: req.body.rating, user: user, comment: req.body.comment}}}, {upsert: true}, profileReview(req, res))
+}
+
+function profileReview (req, res) {
+  Profile.findOneAndUpdate({profileId: req.user.profile._id}, {$push: {}} function(err, profile) {
+    profile.breweries.push({"reviews": {rating: req.body.rating, user: user, comment: req.body.comment}})
+    profile.save(function(err) {
+      if (err) return res.send(500, {error: err})
+      return res.redirect(`/breweries/${id}`)  
+    })
   })
 }
+
+// function (err) {
+//   if (err) return res.send(500, {error: err})
+//   return res.redirect(`/breweries/${id}`)
+// })
 
 export {
   index,
   show,
   createReview,
+  profileReview,
 }
