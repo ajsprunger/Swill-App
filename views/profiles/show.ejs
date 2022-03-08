@@ -22,11 +22,11 @@
       </tr>
     </thead>
     <tbody>
-      <% profile.reviews.forEach(function (review) { %>
+      <% profile.breweries.forEach(function (brewery) { %>
         <tr>
           <td><%= brewery.name %></td>
-          <td><%= brewery.comment %></td>
-          <td><%= reviews.rating %></td>
+          <td><%= brewery.reviews %></td>
+          <td><%= '' %></td>
         </tr>
       <% }) %>
     </tbody>
