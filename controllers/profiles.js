@@ -16,8 +16,10 @@ function index(req, res) {
 
 function show(req, res) {
   Profile.findById(req.params.id)
-  .populate('breweries')
+  // .populate('breweries')
+  .populate('reviews')
   .exec(function (err, profile) {
+    console.log('profile', profile)
     Profile.findById(req.user.profile._id)
     .then(self => {
       const isSelf = self._id.equals(profile._id)

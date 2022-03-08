@@ -58,19 +58,19 @@ function createReview(req, res) {
   //create review
   resp.on('end', () => {
     let parseData = JSON.parse(data)
-    console.log('data', parseData)
     Brewery.findOneAndUpdate({breweryId:id}, {breweryId:id, name:parseData.name}, {upsert: true, returnDocument: 'after'}, function (err, brewery) {
       if (err) return res.send(500, {error: err})
       //create review
-      Review.findOneAndUpdate({brewery:brewery._id, user:user}, {rating: req.body.rating, user: user, comment: req.body.comment, brewery:brewery._id}, {upsert: true, returnDocument: 'after'}, function (err, review) {
-        //create link to review in profile
+      Review.findOneAndUpdate({brewery:brewery._id, user:user}, {rating: req.body.rating, user: user, comment: req.body.comment, brewery:brewery._id, breweryName:brewery.name}, {upsert: true, returnDocument: 'after'}, function (err, review) {
+      //create link to review in profile
+      if (err) return res.send(500, {error: err})
+      Profile.findOne({profileId: user}, function(err, profile) {
         if (err) return res.send(500, {error: err})
-        Profile.findOne({profileId: user}, function(err, profile) {
-          if (err) return res.send(500, {error: err})
-          profile.breweries.push(brewery._id)
-          profile.save(function(err) {
-              if (err) return res.send(500, {error: err})
-            })
+        profile.breweries.push(brewery._id)
+        profile.reviews.push(review._id)
+        profile.save(function(err) {
+            if (err) return res.send(500, {error: err})
+          })
         })
         brewery.reviews.push(review._id)
         brewery.save(function(err) {
