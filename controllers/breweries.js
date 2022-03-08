@@ -50,25 +50,35 @@ function createReview(req, res) {
   let user = req.user.profile._id
   let id = req.params.id
   let url = 'https://api.openbrewerydb.org/breweries/' + id
+  let data = ''
+  https.get(url, (resp) => {
+    resp.on('data', (chunk) => {
+      data += chunk;
+    })
   //create review
-  Brewery.findOneAndUpdate({breweryId:id}, {breweryId:id, name:req.params.name}, {upsert: true, returnDocument: 'after'}, function (err, brewery) {
-    if (err) return res.send(500, {error: err})
-    //create review
-    Review.findOneAndUpdate({brewery:brewery._id, user:user}, {rating: req.body.rating, user: user, comment: req.body.comment, brewery:brewery._id}, {upsert: true, returnDocument: 'after'}, function (err, review) {
-      //create link to review in profile
+  resp.on('end', () => {
+    let parseData = JSON.parse(data)
+    console.log('data', parseData)
+    Brewery.findOneAndUpdate({breweryId:id}, {breweryId:id, name:parseData.name}, {upsert: true, returnDocument: 'after'}, function (err, brewery) {
       if (err) return res.send(500, {error: err})
-      Profile.findOne({profileId: user}, function(err, profile) {
+      //create review
+      Review.findOneAndUpdate({brewery:brewery._id, user:user}, {rating: req.body.rating, user: user, comment: req.body.comment, brewery:brewery._id}, {upsert: true, returnDocument: 'after'}, function (err, review) {
+        //create link to review in profile
         if (err) return res.send(500, {error: err})
-        profile.breweries.push(brewery._id)
-        profile.save(function(err) {
+        Profile.findOne({profileId: user}, function(err, profile) {
+          if (err) return res.send(500, {error: err})
+          profile.breweries.push(brewery._id)
+          profile.save(function(err) {
+              if (err) return res.send(500, {error: err})
+            })
+        })
+        brewery.reviews.push(review._id)
+        brewery.save(function(err) {
             if (err) return res.send(500, {error: err})
           })
-      })
-      brewery.reviews.push(review._id)
-      brewery.save(function(err) {
-          if (err) return res.send(500, {error: err})
+        return res.redirect(`/breweries/${id}`)
         })
-      return res.redirect(`/breweries/${id}`)
+      })  
     })
   })
 }
