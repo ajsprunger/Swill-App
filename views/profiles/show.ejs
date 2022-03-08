@@ -12,7 +12,7 @@
     </div>
   <% } %>
   <h1>It's <%= isSelf ? "you" : profile.name %>!</h1>
-  <h1>Brewery<%= profile.breweries %></h1>
+  <h1>Your Reviews</h1>
   <table>
     <thead>
       <tr>
@@ -22,11 +22,11 @@
       </tr>
     </thead>
     <tbody>
-      <% profile.breweries.forEach(function (brewery) { %>
+      <% profile.reviews.forEach(function (review) { %>
         <tr>
           <td><%= brewery.name %></td>
-          <td><%= brewery.review %></td>
-          <td><%= brewery.rating %></td>
+          <td><%= brewery.comment %></td>
+          <td><%= reviews.rating %></td>
         </tr>
       <% }) %>
     </tbody>

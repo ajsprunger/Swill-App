@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema
 
 const brewerySchema = new Schema({
+  name: String,
   breweryId: String,
   reviews: [{type: Schema.Types.ObjectId, ref: "Reviews"}],
 }, {
