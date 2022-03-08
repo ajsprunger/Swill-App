@@ -38,6 +38,7 @@
     </select>
     <button type="submit">Submit</button>
   </form>
+  <% if (brewery.reviews && brewery.reviews.length) { %>
   <h2>Reviews</h2>
   <table>
     <thead>
@@ -57,6 +58,9 @@
       <% }) %>
     </tbody>
   </table>
+  <% } else { %>
+    <h2>No Reviews Yet</h2>
+  <% } %>
 </main>
 
 

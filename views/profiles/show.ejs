@@ -13,6 +13,7 @@
     </div>
   <% } %>
   <h1>It's <%= isSelf ? "you" : profile.name %>!</h1>
+  <% if (profile.reviews && profile.reviews.length) { %>
   <h1>Your Reviews</h1>
   <table>
     <thead>
@@ -20,6 +21,7 @@
         <th>Brewery</th>
         <th>Review</th>
         <th>Rating</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -28,10 +30,18 @@
           <td><%= review.breweryName %></td>
           <td><%= review.comment %></td>
           <td><%= review.rating %></td>
+          <% if (isSelf) { %> 
+            <form action="/profiles/<%= review._id %>?_method=DELETE" method="POST">
+              <button type="submit">Delete Review</button>
+            </form>
+          <% } %>
         </tr>
       <% }) %>
     </tbody>
   </table>
+  <% } else { %>
+    <h1>No Reviews Yet</h1>
+  <% } %>
 </main>
 
 <%- include('../partials/footer') %>

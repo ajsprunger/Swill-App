@@ -30,17 +30,17 @@ function show(req, res) {
   let id = req.originalUrl
   let url = 'https://api.openbrewerydb.org' + id
   let data = ''
-  console.log('urlid', id)
   https.get(url, (resp) => {
     resp.on('data', (chunk) => {
       data += chunk;
     })
     resp.on('end', () => {
       let parseData = JSON.parse(data)
-      Brewery.findById(parseData.id)
+      console.log('parsedId', parseData.id)
+      Brewery.find({id: parseData.id})
       .populate('reviews')
       .exec(function (err, brewery){
-        console.log('brewery', )
+        console.log('brewery', brewery)
         res.render('breweries/show', {
           data: parseData,
           title: data.name,
@@ -92,13 +92,6 @@ function createReview(req, res) {
 }
 
 
-// async function fetchData() {
-//   const url = 'https://api.openbrewerydb.org/breweries/'
-//   fetch(url)
-//   .then(response => response.json())
-//   .then(data => console.log('fetchdata', data))
-// }
-// fetchData()
 
 
 export {
