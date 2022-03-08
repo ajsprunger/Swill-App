@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const brewerySchema = new Schema({
   name: String,
   breweryId: String,
-  reviews: [{type: Schema.Types.ObjectId, ref: "Reviews"}],
+  reviews: [{type: Schema.Types.ObjectId, ref: "Review"}],
 }, {
   timestamps: true
 })

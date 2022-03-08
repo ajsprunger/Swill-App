@@ -37,7 +37,7 @@ function show(req, res) {
     resp.on('end', () => {
       let parseData = JSON.parse(data)
       console.log('parsedId', parseData.id)
-      Brewery.find({id: parseData.id})
+      Brewery.findOne({breweryId: parseData.id})
       .populate('reviews')
       .exec(function (err, brewery){
         console.log('brewery', brewery)
