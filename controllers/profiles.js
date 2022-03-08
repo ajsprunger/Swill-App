@@ -19,7 +19,6 @@ function show(req, res) {
   // .populate('breweries')
   .populate('reviews')
   .exec(function (err, profile) {
-    console.log('profile', profile)
     Profile.findById(req.user.profile._id)
     .then(self => {
       const isSelf = self._id.equals(profile._id)

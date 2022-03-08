@@ -39,6 +39,24 @@
     <button type="submit">Submit</button>
   </form>
   <h2>Reviews</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Review</th>
+        <th>Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% brewery.reviews.forEach(function (review) { %>
+        <tr>
+          <td><%= review.breweryName %></td>
+          <td><%= review.comment %></td>
+          <td><%= review.rating %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
 </main>
 
 

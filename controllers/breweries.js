@@ -30,14 +30,22 @@ function show(req, res) {
   let id = req.originalUrl
   let url = 'https://api.openbrewerydb.org' + id
   let data = ''
+  console.log('urlid', id)
   https.get(url, (resp) => {
     resp.on('data', (chunk) => {
       data += chunk;
     })
     resp.on('end', () => {
-      res.render('breweries/show', {
-        data: JSON.parse(data),
-        title: data.name
+      let parseData = JSON.parse(data)
+      Brewery.findById(parseData.id)
+      .populate('reviews')
+      .exec(function (err, brewery){
+        console.log('brewery', )
+        res.render('breweries/show', {
+          data: parseData,
+          title: data.name,
+          brewery
+        })
       })
     })
   })
@@ -83,24 +91,14 @@ function createReview(req, res) {
   })
 }
 
-// function createReview(req, res) {
-//   let user = req.user.profile._id
-//   let id = req.params.id
-//   Review.findOneAndUpdate({breweryId:id}, {$push: {"reviews": {rating: req.body.rating, user: user, comment: req.body.comment}}}, {upsert: true}, function (err) {
-//     if (err) return res.send(500, {error: err})
-//     return res.redirect(`/breweries/${id}`)
-//   }) 
-// }
 
-// function profileReview (req, res) {
-//   Profile.findOneAndUpdate({profileId: req.user.profile._id}, {$push: {}} function(err, profile) {
-//     profile.breweries.push({"reviews": {rating: req.body.rating, user: user, comment: req.body.comment}})
-//     profile.save(function(err) {
-//       if (err) return res.send(500, {error: err})
-//       return res.redirect(`/breweries/${id}`)  
-//     })
-//   })
+// async function fetchData() {
+//   const url = 'https://api.openbrewerydb.org/breweries/'
+//   fetch(url)
+//   .then(response => response.json())
+//   .then(data => console.log('fetchdata', data))
 // }
+// fetchData()
 
 
 export {
