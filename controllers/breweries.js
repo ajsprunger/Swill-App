@@ -40,7 +40,6 @@ function show(req, res) {
       Brewery.findOne({breweryId: parseData.id})
       .populate('reviews')
       .exec(function (err, brewery){
-        console.log('brewery', brewery)
         res.render('breweries/show', {
           data: parseData,
           title: data.name,
@@ -80,10 +79,12 @@ function createReview(req, res) {
             if (err) return res.send(500, {error: err})
           })
         })
+        if(!brewery.reviews.some(r => r.equals(review._id))) {
         brewery.reviews.push(review._id)
         brewery.save(function(err) {
             if (err) return res.send(500, {error: err})
           })
+        }
         return res.redirect(`/breweries/${id}`)
         })
       })  
