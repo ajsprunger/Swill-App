@@ -15,11 +15,6 @@ label {
 .search {
   width: 100vw;
   align-items: center;
-  align-self: center;
-  align-content: center;
-  justify-content: center;
-  justify-items: center;
-  justify-self: center;
 }
 
 input {
@@ -36,6 +31,8 @@ td {
 
 main {
   background-image: url('../../images/backgrounds/brewtank.jpg');
+  height: 100vh;
+  justify-content: flex-start;
 }
 
 #details {

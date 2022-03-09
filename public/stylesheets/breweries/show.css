@@ -1,8 +1,22 @@
+main {
+  background-image: url('../../images/backgrounds/kegs.jpg');
+  background-size: cover;
+  height: 100vh;
+}
+
+.wrap {
+  background-color: rgba(0, 0, 0, 0.65);
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
 section {
   display: grid;
   grid-template-columns: 150px auto;
   font-size: 2rem;
   text-align: left;
+  justify-content: center;
 }
 
 h2 {

@@ -3,6 +3,7 @@
 <%- include('../partials/nav') %>
 
 <main>
+  <div class="wrap">
   <h1><%= data.name %></h1>
   <section>
     <% if(data.brewery_type) { %>
@@ -71,6 +72,7 @@
   <% } else { %>
     <h2>No Reviews Yet</h2>
   <% } %>
+  </div>
 </main>
 
 
