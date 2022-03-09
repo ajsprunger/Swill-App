@@ -33,6 +33,7 @@ main {
   background-image: url('../../images/backgrounds/brewtank.jpg');
   height: 100vh;
   justify-content: flex-start;
+  background-position: top;
 }
 
 #details {
