@@ -45,13 +45,13 @@ function deleteReview(req, res) {
     .then(() =>{
       Review.findById(req.params.reviewId)
       .then(review => {
-        console.log('review', review)
         Brewery.findById(review.brewery)
         .then(brewery => {
           console.log('req.params', req.params)
           brewery.reviews.remove({_id: req.params.reviewId})
           brewery.save()
           .then(() => {
+            console.log('after then, before delete')
             Review.findByIdAndDelete(req.params.reviewId)
             .then(() => {
               res.redirect(`/profiles/${req.params.profileId}`)
