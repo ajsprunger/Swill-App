@@ -6,8 +6,8 @@
   <nav id="navbar">
     <a href="/breweries">Browse Breweries</a>
     <a href="/profiles">View Profiles</a>
-    <a href="/profiles">My Profile</a>
     <% if (user) { %>
+      <a href="/profiles/<%= user.profile._id %>">My Profile</a>
       <a href="/auth/logout" class="log">Logout</a>
     <% } else { %>
       <a href="/auth/google" class="siwg-link log">
