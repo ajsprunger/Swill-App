@@ -25,6 +25,16 @@
       <div>ZIP:</div>
       <div><%= data.postal_code %></div>
     <% } %>
+    <% if(brewery && brewery.reviews && brewery.reviews.length) { %>
+      <div>Average Rating:</div>
+      <div>
+        <% let total = 0 %>
+        <% brewery.reviews.forEach(function(review) { %>
+          <% total += review.rating %>
+        <% }) %> 
+        <%= (total / brewery.reviews.length).toFixed(1) %>
+      </div>
+    <% } %>
   </section>
   <form action="<%= data.id %>/reviews" method="POST">
     <h2>Add a Review</h2>
