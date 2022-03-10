@@ -8,7 +8,8 @@ function index(req, res) {
   let name = req.query.name || ''
   let city = req.query.city || ''
   let state = req.query.state || ''
-  let url = 'https://api.openbrewerydb.org/breweries?by_name=' + name + '&by_city=' + city + '&by_state=' + state 
+  let num = 1
+  let url = 'https://api.openbrewerydb.org/breweries?by_name=' + name + '&by_city=' + city + '&by_state=' + state + '&page=' + num
   let data = '';
   https.get(url, (resp) => {
     resp.on('data', (chunk) => {
@@ -36,13 +37,12 @@ function show(req, res) {
     })
     resp.on('end', () => {
       let parseData = JSON.parse(data)
-      console.log('parsedId', parseData.id)
       Brewery.findOne({breweryId: parseData.id})
       .populate('reviews')
       .exec(function (err, brewery){
         res.render('breweries/show', {
           data: parseData,
-          title: data.name,
+          title: parseData.name,
           brewery
         })
       })
