@@ -22,6 +22,7 @@ label {
 
 .search {
   width: 100vw;
+  font-size: 1.7rem;
   text-align: center;
 }
 
@@ -35,7 +36,8 @@ th {
 }
 
 td {
-  padding: 5px 25px;
+  padding: 4px 25px;
+  font-size: 1.7rem;
 }
 
 main {
