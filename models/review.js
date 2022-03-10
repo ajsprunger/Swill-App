@@ -6,6 +6,7 @@ const reviewSchema = new mongoose.Schema ({
   breweryName: String,
   rating: Number, 
   comment: String,
+  breweryId: String,
   user: {type: Schema.Types.ObjectId, ref: "Profile"},
   brewery:{type: Schema.Types.ObjectId, ref: "Brewery"},
 }, {

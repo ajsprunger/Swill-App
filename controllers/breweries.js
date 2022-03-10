@@ -68,7 +68,7 @@ function createReview(req, res) {
     Brewery.findOneAndUpdate({breweryId:id}, {breweryId:id, name:parseData.name}, {upsert: true, returnDocument: 'after'}, function (err, brewery) {
       if (err) return res.status(500).send({error: err})
       //create review
-      Review.findOneAndUpdate({brewery:brewery._id, user:user}, {rating: req.body.rating, user: user, comment: req.body.comment, brewery:brewery._id, breweryName:brewery.name}, {upsert: true, returnDocument: 'after'}, function (err, review) {
+      Review.findOneAndUpdate({brewery:brewery._id, user:user}, {rating: req.body.rating, user: user, comment: req.body.comment, breweryId:brewery.breweryId, breweryName:brewery.name}, {upsert: true, returnDocument: 'after'}, function (err, review) {
       //create link to review in profile
       if (err) return res.status(500).send({error: err})
       Profile.findOne({profileId: user}, function(err, profile) {
