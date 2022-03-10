@@ -24,6 +24,8 @@ label {
   width: 100vw;
   font-size: 1.7rem;
   text-align: center;
+  align-items: center;
+  padding: 5px;
 }
 
 input {

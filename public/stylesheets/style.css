@@ -29,16 +29,36 @@ main {
 }
 
 #navbar {
-  background-color: white;
+  background-color: #5f5d68;
   font-size: 1.6rem;
   display: flex;
   justify-content: right;
   align-items: center;
 }
 
+.fas::before {
+  font-family: "Font Awesome 5 Free";
+  padding: 5px;
+}
+
+#logo {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 2.2rem;
+  color: white;
+  margin-right: auto;
+  vertical-align: center;
+  text-align: center;
+  display: flex;
+}
+
+#swill {
+  font-size: 3rem;
+}
+
 #navbar > a {
   padding: 10px;
   text-decoration: none;
+  color: white;
 }
 
 main {
