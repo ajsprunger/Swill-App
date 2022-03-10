@@ -18,7 +18,6 @@ function index(req, res) {
 
 function show(req, res) {
   Profile.findById(req.params.id)
-  // .populate('breweries')
   .populate('reviews')
   .exec(function (err, profile) {
     Profile.findById(req.user.profile._id)

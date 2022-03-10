@@ -8,7 +8,7 @@ function index(req, res) {
   let name = req.query.name || ''
   let city = req.query.city || ''
   let state = req.query.state || ''
-  let url = 'https://api.openbrewerydb.org/breweries?by_name=' + name + '&by_city=' + city + '&by_state=' + state
+  let url = 'https://api.openbrewerydb.org/breweries?by_name=' + name + '&by_city=' + city + '&by_state=' + state 
   let data = '';
   https.get(url, (resp) => {
     resp.on('data', (chunk) => {
