@@ -28,6 +28,7 @@ Profile View Page
 <li>Pagination on reviews page</li> 
 <li>Sort breweries by average rating</li> 
 <li>Follow other profiles</li> 
+<li>Ability to page through results</li>
 </ul>
 
 ## Credits

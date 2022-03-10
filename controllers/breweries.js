@@ -8,8 +8,7 @@ function index(req, res) {
   let name = req.query.name || ''
   let city = req.query.city || ''
   let state = req.query.state || ''
-  let num = 1
-  let url = 'https://api.openbrewerydb.org/breweries?by_name=' + name + '&by_city=' + city + '&by_state=' + state + '&page=' + num
+  let url = 'https://api.openbrewerydb.org/breweries?by_name=' + name + '&by_city=' + city + '&by_state=' + state + '&page=' 
   let data = '';
   https.get(url, (resp) => {
     resp.on('data', (chunk) => {
@@ -18,7 +17,29 @@ function index(req, res) {
     resp.on('end', () => {
       res.render('breweries/index', {
         data: JSON.parse(data),
-        title: "Breweries"
+        title: "Breweries",
+        url: url,
+      })
+    });
+  })
+  .on("error", (err) => {
+    console.log("Error: " + err.message);
+  })
+}
+
+function nextPage(req, res) {
+  let url = req.query.url || ''
+  let num = 1
+  let data = ''
+  https.get(url, (resp) => {
+    resp.on('data', (chunk) => {
+      data += chunk;
+    });
+    resp.on('end', () => {
+      res.render('breweries/index', {
+        data: JSON.parse(data),
+        title: "Breweries",
+        url: url,
       })
     });
   })
@@ -67,11 +88,9 @@ function createReview(req, res) {
     let parseData = JSON.parse(data)
     Brewery.findOneAndUpdate({breweryId:id}, {breweryId:id, name:parseData.name}, {upsert: true, returnDocument: 'after'}, function (err, brewery) {
       if (err) return res.status(500).send({error: err})
-      //create review
       Review.findOneAndUpdate({brewery:brewery._id, user:user}, {rating: req.body.rating, userName: req.user.profile.name, comment: req.body.comment, breweryId:brewery.breweryId, breweryName:brewery.name}, {upsert: true, returnDocument: 'after'}, function (err, review) {
-      //create link to review in profile
       if (err) return res.status(500).send({error: err})
-      Profile.findOne({profileId: user}, function(err, profile) {
+      Profile.findOne({_id: user}, function(err, profile) {
         if (err) return res.status(500).send({error: err})
         if(!profile.reviews.some(r => r.equals(review._id))) {
           profile.breweries.push(brewery._id)
