@@ -51,6 +51,12 @@ main {
   display: flex;
 }
 
+#navlogo {
+  display: flex;
+  text-decoration: none;
+  color: white;
+}
+
 #swill {
   font-size: 3rem;
 }
