@@ -1,5 +1,6 @@
 main {
   background-image: url('../../images/backgrounds/tap.jpg');
+  background-attachment: fixed;
   height: 100vh;
   background-position: bottom;
 }

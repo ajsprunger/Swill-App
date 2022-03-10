@@ -1,5 +1,6 @@
 main {
   background-image: url('../../images/backgrounds/kegs.jpg');
+  background-attachment: fixed;
   background-size: cover;
   height: 100vh;
 }

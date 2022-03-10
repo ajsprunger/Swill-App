@@ -1,5 +1,6 @@
 main {
   background-image: url('../../images/backgrounds/beerglass.jpg');
+  background-attachment: fixed;
   background-position: bottom;
   height: 100vh;
 }
