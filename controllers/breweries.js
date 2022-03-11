@@ -4,32 +4,42 @@ import { Profile } from "../models/profile.js";
 import { Review } from "../models/review.js"
 import { profile } from "console";
 
+var url = ''
+
 function index(req, res) {
   let name = req.query.name || ''
   let city = req.query.city || ''
   let state = req.query.state || ''
-  let url = 'https://api.openbrewerydb.org/breweries?by_name=' + name + '&by_city=' + city + '&by_state=' + state + '&page=' 
+  let num = 1
+  url = 'https://api.openbrewerydb.org/breweries?by_name=' + name + '&by_city=' + city + '&by_state=' + state + '&page=' + num
   let data = '';
+  let pageNumber
   https.get(url, (resp) => {
     resp.on('data', (chunk) => {
       data += chunk;
+      pageNumber = url.charAt(url.length-1)
     });
     resp.on('end', () => {
       res.render('breweries/index', {
         data: JSON.parse(data),
         title: "Breweries",
+        pageNumber: parseInt(num),
         url: url,
       })
+      console.log('pagenum', pageNumber)
     });
   })
   .on("error", (err) => {
     console.log("Error: " + err.message);
   })
+  return url
 }
 
-function nextPage(req, res) {
-  let url = req.query.url || ''
-  let num = 1
+function page(req, res) {
+  let num = req.params.pageNumber
+  console.log('prams', req.params)
+  url = url.split('&page=')[0] +'&page=' + num
+  console.log('rl', url)
   let data = ''
   https.get(url, (resp) => {
     resp.on('data', (chunk) => {
@@ -40,6 +50,7 @@ function nextPage(req, res) {
         data: JSON.parse(data),
         title: "Breweries",
         url: url,
+        pageNumber: parseInt(num),
       })
     });
   })
@@ -49,8 +60,9 @@ function nextPage(req, res) {
 }
 
 function show(req, res) {
-  let id = req.originalUrl
-  let url = 'https://api.openbrewerydb.org' + id
+  let id = req.params.id
+  let url = 'https://api.openbrewerydb.org/breweries/' + id
+  console.log('url', url)
   let data = ''
   https.get(url, (resp) => {
     resp.on('data', (chunk) => {
@@ -120,4 +132,5 @@ export {
   index,
   show,
   createReview,
+  page,
 }

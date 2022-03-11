@@ -8,8 +8,10 @@ const router = Router()
 router.get('/', breweriesCtrl.index)
 // POST - localhost:3000/brewery
 router.post('/', breweriesCtrl.index)
+// GET
+router.get('/:pageNumber', breweriesCtrl.page)
 // GET - localhost:3000/brewery/:id
-router.get('/:id', breweriesCtrl.show)
+router.get('/show/:id', breweriesCtrl.show)
 // POST - localhost:3000/brewery/:id/reviews
 router.post('/:id/reviews',isLoggedIn, breweriesCtrl.createReview)
 

@@ -58,3 +58,9 @@ main {
 a:hover {
   color: gray;
 }
+
+#buttonHolder {
+  display: inline;
+  padding-bottom: 5px;
+  font-size: 1.5rem;
+}

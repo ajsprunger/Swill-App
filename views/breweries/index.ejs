@@ -11,7 +11,7 @@
 
 <main>
   <h1>Breweries</h1>
-  <form class="search" action="">
+  <form class="search" action="/breweries">
     <label>Name:
       <input type="text" name="name" autocomplete="off" id="name">
     </label>
@@ -23,6 +23,10 @@
     </label>
     <button type="submit">Search</button>
   </form>
+  <div id="buttonHolder">
+    <a href="/breweries/<%= pageNumber-1 %>"><button type="button" class="next">Prev</button></a>
+    <a href="/breweries/<%= pageNumber+1 %>"><button type="button" class="next">Next</button></a>
+  </div>
   <table class="table-md">
     <thead>
       <tr>
@@ -37,7 +41,7 @@
           <td><%= brewery.name %></td>
           <td><%= brewery.city %></td>
           <td><%= brewery.state %></td>
-          <td><a id="details" href="/breweries/<%= brewery.id %>">DETAILS</a></td>
+          <td><a id="details" href="/breweries/show/<%= brewery.id %>">DETAILS</a></td>
         </tr>
       <% }) %>
     </tbody>
