@@ -37,3 +37,5 @@ Profile View Page
 <li>Brewery view photo by ELEVATE from Pexels</li>
 <li>Profile page photo by Pavel Danilyuk from Pexels</li>
 <li>Beer icon by Icons8</li>
+<li>API: Open Brewery DB</li>
+</ul>
