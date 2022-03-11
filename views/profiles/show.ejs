@@ -28,7 +28,7 @@
     <tbody>
       <% profile.reviews.forEach(function (review) { %>
         <tr>
-          <td><a href="/breweries/<%= review.breweryId %>"><%= review.breweryName %></a></td>
+          <td><a href="/breweries/show/<%= review.breweryId %>"><%= review.breweryName %></a></td>
           <td><%= review.comment %></td>
           <td><%= review.rating %></td>
           <td>
