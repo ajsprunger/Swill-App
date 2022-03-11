@@ -37,7 +37,7 @@
       </div>
     <% } %>
   </section>
-  <form action="<%= data.id %>/reviews" method="POST">
+  <form action="/breweries/show/<%= data.id %>/reviews" method="POST">
     <h2>Rate and Review</h2>
     <textarea name="comment" cols="40" rows="5" autocomplete="off"></textarea>
     <select name="rating" id="dropdown" selected="5">

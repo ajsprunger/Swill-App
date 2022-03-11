@@ -13,7 +13,7 @@ router.get('/:pageNumber', breweriesCtrl.page)
 // GET - localhost:3000/brewery/:id
 router.get('/show/:id', breweriesCtrl.show)
 // POST - localhost:3000/brewery/:id/reviews
-router.post('/:id/reviews',isLoggedIn, breweriesCtrl.createReview)
+router.post('/show/:id/reviews',isLoggedIn, breweriesCtrl.createReview)
 
 
 

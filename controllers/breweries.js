@@ -26,7 +26,6 @@ function index(req, res) {
         pageNumber: parseInt(num),
         url: url,
       })
-      console.log('pagenum', pageNumber)
     });
   })
   .on("error", (err) => {
@@ -37,9 +36,7 @@ function index(req, res) {
 
 function page(req, res) {
   let num = req.params.pageNumber
-  console.log('prams', req.params)
   url = url.split('&page=')[0] +'&page=' + num
-  console.log('rl', url)
   let data = ''
   https.get(url, (resp) => {
     resp.on('data', (chunk) => {
@@ -62,7 +59,6 @@ function page(req, res) {
 function show(req, res) {
   let id = req.params.id
   let url = 'https://api.openbrewerydb.org/breweries/' + id
-  console.log('url', url)
   let data = ''
   https.get(url, (resp) => {
     resp.on('data', (chunk) => {
@@ -118,7 +114,7 @@ function createReview(req, res) {
             if (err) return res.status(500).send({error: err})
           })
         }
-        return res.redirect(`/breweries/${id}`)
+        return res.redirect(`/breweries/show/${id}`)
         })
       })  
     })
